@@ -1,0 +1,74 @@
+.todoFormContainer {
+  margin-bottom: 20px;
+}
+
+.todoFormContainer form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todoFormContainer button {
+  font-size: 1.3rem;
+  background-color: #95d330;
+}
+
+.inputText {
+  width: 40%;
+  height: 30px;
+  font-size: 1.3rem;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #eff7fa;
+  color: #000;
+}
+
+.checkInputText {
+  width: 40%;
+  height: 30px;
+  font-size: 1.3rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #eff7fa;
+  color: grey;
+}
+
+.checkCharactersText {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-left: 18.5%;
+  gap: 5px;
+  color: #df8675;
+}
+
+@media screen and (max-width: 480px) {
+  .checkCharactersText {
+    font-size: 0.9rem;
+    margin-left: 12%;
+  }
+
+  .inputText {
+    font-size: 1.2rem;
+    height: 25px;
+  }
+
+  .checkInputText {
+    font-size: 1.2rem;
+    height: 25px;
+  }
+
+  .todoFormContainer button {
+    font-size: 1.2rem;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+  .checkCharactersText {
+    font-size: 0.8rem;
+    margin-left: 8%;
+  }
+}
