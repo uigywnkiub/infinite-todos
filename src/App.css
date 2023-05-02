@@ -1,7 +1,8 @@
 .App {
   text-align: center;
   max-width: 600px;
-  margin: 2rem auto;
+  margin: 0 auto;
+  padding: 1.5rem;
   overflow: hidden;
   font-weight: 600;
   color: rgb(239, 247, 250, 0.7);

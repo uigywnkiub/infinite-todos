@@ -2,11 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .titleIcon {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   margin-top: 4px;
 }
 

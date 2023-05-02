@@ -1,11 +1,12 @@
 .todoFormContainer {
-  margin-bottom: 20px;
+  margin: 1rem 0;
 }
 
 .todoFormContainer form {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .todoFormContainer button {
@@ -39,36 +40,69 @@
   display: flex;
   align-items: center;
   margin-top: 5px;
-  margin-left: 18.5%;
+  margin-left: 19%;
   gap: 5px;
+  color: #df8675;
+}
+
+.characterLimiter {
+  display: flex;
+  margin-top: 5px;
+  justify-content: space-between;
+  margin-left: 19%;
+  margin-right: 35.6%;
+}
+
+.characterLimiterCount {
   color: #df8675;
 }
 
 @media screen and (max-width: 480px) {
   .checkCharactersText {
     font-size: 0.9rem;
-    margin-left: 12%;
+    margin-left: 13%;
+  }
+
+  .characterLimiter {
+    font-size: 0.9rem;
+    margin-left: 9%;
+
   }
 
   .inputText {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     height: 25px;
   }
 
   .checkInputText {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     height: 25px;
   }
 
   .todoFormContainer button {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
 }
 
 @media screen and (max-width: 320px) {
   .checkCharactersText {
-    font-size: 0.8rem;
     margin-left: 8%;
+  }
+
+  .characterLimiter {
+    margin-left: 8%;
+  }
+
+  .inputText {
+    font-size: 1rem;
+  }
+
+  .checkInputText {
+    font-size: 1rem;
+  }
+
+  .todoFormContainer button {
+    font-size: 1rem;
   }
 }

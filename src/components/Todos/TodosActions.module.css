@@ -1,3 +1,21 @@
 .todosActionsContainer {
-  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0.26rem;
+  margin: 0.41rem;
+}
+
+.startSessionLink {
+  padding-bottom: 6px;
+  cursor: pointer;
+  border-bottom: 3px solid white;
+  color: white;
+  transition: all 0.2s;
+}
+
+.startSessionLink:hover {
+  padding-bottom: 0px;
+  color: #90CAF9;
+  border-bottom: 3px solid #4051B6;
 }

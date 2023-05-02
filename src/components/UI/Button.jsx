@@ -1,15 +1,18 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import styles from './Button.module.css'
+
+// styles
+import styles from 'components/UI/Button.module.css'
 
 function Button(props) {
   const { children, disabled = false } = props
+
   return (
     <>
       <AnimatePresence>
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 120 }}
+          transition={{ type: 'spring', stiffness: 130 }}
           exit={{ opacity: 0 }}
           {...props}
           className={styles.button}

@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { FcTodoList } from 'react-icons/fc'
-import styles from './TodoTitle.module.css'
+
+// styles
+import styles from 'components/Todos/TodoTitle.module.css'
 
 function TodoTitle() {
   return (
@@ -9,7 +11,7 @@ function TodoTitle() {
       animate={{ opacity: 1, x: 0 }}
       transition={{
         type: 'spring',
-        stiffness: 120,
+        stiffness: 130,
       }}
       className={styles.TodoTitleContainer}
     >
@@ -18,7 +20,7 @@ function TodoTitle() {
         animate={{ opacity: 1, rotateZ: 0 }}
         transition={{
           type: 'spring',
-          stiffness: 120,
+          stiffness: 130,
         }}
       >
         <FcTodoList className={styles.titleIcon} />
