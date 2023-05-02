@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
 // styles
-import styles from 'components/UI/Button.module.css'
+import styles from './Button.module.css'
 
 function Button(props) {
   const { children, disabled = false } = props

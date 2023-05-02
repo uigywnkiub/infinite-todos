@@ -3,10 +3,10 @@ import { BiErrorCircle } from 'react-icons/bi'
 import { useState } from 'react'
 
 // components
-import Button from 'components/UI/Button'
+import Button from '../UI/Button'
 
 // styles
-import styles from 'components/Todos/TodoForm.module.css'
+import styles from './TodoForm.module.css'
 
 function TodoForm({ localStorTodos, todos, addTodo, isEditSession }) {
   const [text, setText] = useState('')

@@ -3,13 +3,13 @@ import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { RiShieldCheckFill, RiLoginBoxFill, RiSpam3Fill } from 'react-icons/ri'
 
 // components
-import Button from 'components/UI/Button'
+import Button from '../UI/Button'
 
 // hooks
-import { useLocalStorage } from 'hooks/useLocalStorage'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 // styles
-import styles from 'components/Modal/CodeModal.module.css'
+import styles from './CodeModal.module.css'
 
 const Modal = ({
   isOpenModal,

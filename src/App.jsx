@@ -3,17 +3,17 @@ import { useState, useEffect, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 // components
-import TodoTitle from 'components/Todos/TodoTitle'
-import TodoForm from 'components/Todos/TodoForm'
-import TodosActions from 'components/Todos/TodosActions'
-import TodoList from 'components/Todos/TodoList'
-import CodeModal from 'components/Modal/CodeModal'
+import TodoTitle from './components/Todos/TodoTitle'
+import TodoForm from './components/Todos/TodoForm'
+import TodosActions from './components/Todos/TodosActions'
+import TodoList from './components/Todos/TodoList'
+import CodeModal from './components/Modal/CodeModal'
 
 // hooks
-import { useLocalStorage } from 'hooks/useLocalStorage'
+import { useLocalStorage } from './hooks/useLocalStorage'
 
 // styles
-import 'App.css'
+import './App.css'
 
 function App() {
   const [todos, setTodos] = useState([])

@@ -7,10 +7,10 @@ import {
 import { BiReset } from 'react-icons/bi'
 
 // components
-import Button from 'components/UI/Button'
+import Button from '../UI/Button'
 
 // styles
-import styles from 'components/Todos/TodosActions.module.css'
+import styles from './TodosActions.module.css'
 
 function TodosActions({
   resetTodos,

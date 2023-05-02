@@ -2,11 +2,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { RiEdit2Fill } from 'react-icons/ri'
 
 // components
-import Todo from 'components/Todos/Todo'
-import Button from 'components/UI/Button'
+import Todo from './Todo'
+import Button from '../UI/Button'
 
 // styles
-import styles from 'components/Todos/TodosActions.module.css'
+import styles from './TodosActions.module.css'
 
 function TodoList({
   localTodosLength,

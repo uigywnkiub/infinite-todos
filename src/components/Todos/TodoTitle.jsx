@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { FcTodoList } from 'react-icons/fc'
 
 // styles
-import styles from 'components/Todos/TodoTitle.module.css'
+import styles from './TodoTitle.module.css'
 
 function TodoTitle() {
   return (

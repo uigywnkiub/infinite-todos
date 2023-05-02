@@ -13,7 +13,7 @@ import {
 } from 'react-icons/ri'
 
 // styles
-import styles from 'components/Todos/Todo.module.css'
+import styles from './Todo.module.css'
 
 function Todo({
   todo,
