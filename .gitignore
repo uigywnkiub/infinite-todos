@@ -20,6 +20,7 @@ build
 
 # Ignore log files
 *.log
+.gitignore
 
 # Config files
 config
