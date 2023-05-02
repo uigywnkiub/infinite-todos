@@ -1,6 +1,7 @@
 {
   "name": "infinite-todos",
   "version": "2.0.0",
+  "homepage": "",
   "private": "false",
   "dependencies": {
     "framer-motion": "^7.6.2",
