@@ -1,12 +1,12 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { RiEdit2Fill } from 'react-icons/ri'
+import { motion, AnimatePresence } from "framer-motion";
+import { RiEdit2Fill } from "react-icons/ri";
 
 // components
-import Todo from './Todo'
-import Button from '../UI/Button'
+import Todo from "./Todo";
+import Button from "../UI/Button";
 
 // styles
-import styles from './TodosActions.module.css'
+import styles from "./TodosActions.module.css";
 
 function TodoList({
   localTodosLength,
@@ -36,7 +36,7 @@ function TodoList({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{
-                  type: 'tween',
+                  type: "tween",
                   stiffness: 130,
                   duration: 0.3,
                   delay: 0.5,
@@ -50,7 +50,7 @@ function TodoList({
                         initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
                         animate={{ opacity: 1, scale: 1, rotate: -360 }}
                         transition={{
-                          type: 'spring',
+                          type: "spring",
                           stiffness: 130,
                         }}
                         className={styles.todosActionsContainer}
@@ -64,10 +64,10 @@ function TodoList({
                     <motion.h2
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ type: 'spring', duration: 0.3, delay: 0 }}
+                      transition={{ type: "spring", duration: 0.3, delay: 0 }}
                       exit={{ opacity: 0, y: 20 }}
                     >
-                      Now you can start a{' '}
+                      Now you can start a{" "}
                       <span
                         onClick={startSession}
                         className={styles.startSessionLink}
@@ -85,7 +85,7 @@ function TodoList({
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'tween', duration: 0.3, delay: 1 }}
+              transition={{ type: "tween", duration: 0.3, delay: 1 }}
               exit={{ opacity: 0, y: 20 }}
             >
               {localStorTodos.map((localTodo) => (
@@ -100,18 +100,20 @@ function TodoList({
             </motion.div>
           </AnimatePresence>
 
-          <AnimatePresence>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'tween', duration: 0.3, delay: 1.5 }}
-              exit={{ opacity: 0, y: 20 }}
-            >
-              {`You still have ${localTodosLength} ${
-                localTodosLength > 1 ? 'todos' : 'todo'
-              } left`}
-            </motion.h2>
-          </AnimatePresence>
+          {Object.keys(localStorTodos).length > 0 && (
+            <AnimatePresence>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "tween", duration: 0.3, delay: 1.5 }}
+                exit={{ opacity: 0, y: 20 }}
+              >
+                {`You still have ${localTodosLength} ${
+                  localTodosLength > 1 ? "todos" : "todo"
+                } left`}
+              </motion.h2>
+            </AnimatePresence>
+          )}
         </>
       )}
 
@@ -120,7 +122,7 @@ function TodoList({
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ type: 'tween', duration: 0.3 }}
+            transition={{ type: "tween", duration: 0.3 }}
             exit={{ opacity: 0 }}
           >
             {todos.map((todo) => (
@@ -140,11 +142,11 @@ function TodoList({
                 <motion.h2
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: 'tween', duration: 0.3 }}
+                  transition={{ type: "tween", duration: 0.3, delay: 0.1 }}
                   exit={{ opacity: 0, y: -20 }}
                 >
                   {`You have completed ${lengthCompletedTodos} ${
-                    lengthCompletedTodos > 1 ? 'todos' : 'todo'
+                    lengthCompletedTodos > 1 ? "todos" : "todo"
                   }`}
                 </motion.h2>
               )}
@@ -153,10 +155,10 @@ function TodoList({
             <AnimatePresence>
               {!isAllTodosCompleted && lengthCompletedTodos > 0 && (
                 <motion.h2
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0, y: -40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: 'tween', duration: 0.3 }}
-                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ type: "tween", duration: 0.3, delay: 0.2 }}
+                  exit={{ opacity: 0, y: -40 }}
                 >
                   All tasks are completed
                 </motion.h2>
@@ -166,7 +168,7 @@ function TodoList({
         </AnimatePresence>
       )}
     </>
-  )
+  );
 }
 
-export default TodoList
+export default TodoList;
