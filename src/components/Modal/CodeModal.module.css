@@ -60,14 +60,8 @@
   color: #df8675;
 }
 
-.shieldCheckIcon {
-  color: #95d330;
-  font-size: 2rem;
-}
-
-.blockedIcon {
-  color: #df8675;
-  font-size: 2rem;
+.attemptsText {
+  color: #FFD702;
 }
 
 .redirectText {
@@ -83,35 +77,5 @@
   to {
     color: #df8675;
     opacity: 1;
-  }
-}
-
-.successText {
-  animation: successText 1s 1;
-}
-
-@keyframes successText {
-  from {
-    color: #95d330;
-  }
-}
-
-.loggedInText {
-  animation: loggedText 1s 1;
-}
-
-@keyframes loggedInText {
-  from {
-    color: #95d330;
-  }
-}
-
-.blockedText {
-  animation: blockedText 1s 1;
-}
-
-@keyframes blockedText {
-  from {
-    color: #df8675;
   }
 }

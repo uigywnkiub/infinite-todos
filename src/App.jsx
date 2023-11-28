@@ -1,171 +1,184 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, useCallback } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // components
-import TodoTitle from './components/Todos/TodoTitle'
-import TodoForm from './components/Todos/TodoForm'
-import TodosActions from './components/Todos/TodosActions'
-import TodoList from './components/Todos/TodoList'
-import CodeModal from './components/Modal/CodeModal'
+import TodoTitle from "./components/Todos/TodoTitle";
+import TodoForm from "./components/Todos/TodoForm";
+import TodosActions from "./components/Todos/TodosActions";
+import TodoList from "./components/Todos/TodoList";
+import CodeModal from "./components/Modal/CodeModal";
 
 // hooks
-import { useLocalStorage } from './hooks/useLocalStorage'
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 // styles
-import './App.css'
+import "./App.css";
+import NotifPopup from "./components/NotifPopup/NotifPopup";
+import styles from "./components/Modal/CodeModal.module.css";
 
 function App() {
-  const [todos, setTodos] = useState([])
-  const [localStorTodos, setLocalStorTodos] = useLocalStorage('todos', [])
+  const [todos, setTodos] = useState([]);
+  const [localStorTodos, setLocalStorTodos] = useLocalStorage("todos", []);
   const [localStorTodosText, setLocalStorTodosText] = useLocalStorage(
-    'todosSecureHelper',
+    "todosSecureHelper",
     []
-  )
-  const [codeLocal, setCodeLocal] = useLocalStorage('secureCode', [
-    '',
-    '',
-    '',
-    '',
-  ])
-  const [isBlocked, setIsBlocked] = useLocalStorage('isBlocked', false)
-  const [isEditSession, setIsEditSession] = useState(true)
-  const [isAllTodosCompleted, setIsAllTodosCompleted] = useState(false)
-  const [isCodeModalOpen, setIsCodeModalOpen] = useState(false)
-  const [isTempLoggedIn, setIsTempLoggedIn] = useState(false)
+  );
+  const [codeLocal, setCodeLocal] = useLocalStorage("secureCode", [
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [isBlocked, setIsBlocked] = useLocalStorage("isBlocked", false);
+  const [isEditSession, setIsEditSession] = useState(true);
+  const [isAllTodosCompleted, setIsAllTodosCompleted] = useState(false);
+  const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
+  const [isTempLoggedIn, setIsTempLoggedIn] = useState(false);
+  const [isWarning, setIsWarning] = useState(false);
 
   const openCodeModalHandler = useCallback(() => {
-    setIsCodeModalOpen(true)
-  }, [])
+    setIsCodeModalOpen(true);
+  }, []);
 
   const closeCodeModalHandler = useCallback(() => {
-    setIsCodeModalOpen(false)
-  }, [])
+    setIsCodeModalOpen(false);
+  }, []);
 
-  const lengthCompletedTodos = todos.filter((todo) => todo.isCompleted).length
-
+  // todos lengths
+  const lengthCompletedTodos = todos.filter((todo) => todo.isCompleted).length;
   const lengthLocalStorTodos = localStorTodos.filter(
     (el) => !el.isCompleted
-  ).length
-
-  const lengthTodos = todos.filter((el) => !el.isCompleted).length
+  ).length;
+  const lengthTodos = todos.filter((el) => !el.isCompleted).length;
 
   const addTodoHandler = (text) => {
-    setIsEditSession(false)
+    setIsEditSession(false);
 
     const newTodo = {
       text,
       isCompleted: false,
       isSecure: false,
       id: uuidv4(),
-    }
-    const { id: idMatch } = newTodo
+    };
+    const { id: idMatch } = newTodo;
 
-    setTodos([...todos, newTodo])
-    setLocalStorTodos([...todos, newTodo])
-    setLocalStorTodosText([...localStorTodosText, { text, idMatch }])
-  }
+    setTodos([...todos, newTodo]);
+    setLocalStorTodos([...todos, newTodo]);
+    setLocalStorTodosText([...localStorTodosText, { text, idMatch }]);
+  };
+
+  // helpers
+  const filterTodosHandlerById = (todosArray, id) => {
+    return todosArray.filter((todo) => todo.id !== id);
+  };
+  const findTodosHandler = (todosArray, wantedField, id) => {
+    return todosArray.find((todo) => todo[wantedField] === id);
+  };
 
   const secureTodoHandler = (id, text) => {
-    const replaceWithStars = (todo) => (todo = '•'.repeat(todo.length))
-    const matchedTodo = localStorTodosText.find((el) => el.idMatch === id)
+    const replaceTextWithStars = (todo) => (todo = "•".repeat(todo.length));
+    const matchedTodo = findTodosHandler(localStorTodosText, "idMatch", id);
+    const updateTodosWithSecurityToggle = (todosArray) => {
+      return todosArray.map((todo) =>
+        todo.id === id
+          ? {
+              ...todo,
+              text: !todo.isSecure
+                ? replaceTextWithStars(text)
+                : matchedTodo.text,
+              isSecure: !todo.isSecure,
+            }
+          : { ...todo }
+      );
+    };
 
-    isTempLoggedIn &&
-      setTodos(
-        todos.map((todo) =>
-          todo.id === id
-            ? {
-                ...todo,
-                text: !todo.isSecure
-                  ? replaceWithStars(text)
-                  : matchedTodo.text,
-                isSecure: !todo.isSecure,
-              }
-            : { ...todo }
-        )
-      )
+    if (isTempLoggedIn) {
+      setTodos(updateTodosWithSecurityToggle(todos));
+      setLocalStorTodos(updateTodosWithSecurityToggle(localStorTodos));
+    }
+  };
 
-    isTempLoggedIn &&
-      setLocalStorTodos(
-        localStorTodos.map((todo) =>
-          todo.id === id
-            ? {
-                ...todo,
-                text: !todo.isSecure
-                  ? replaceWithStars(text)
-                  : matchedTodo.text,
-                isSecure: !todo.isSecure,
-              }
-            : { ...todo }
-        )
-      )
-  }
   const deleteTodoHandler = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id))
-    setLocalStorTodos(localStorTodos.filter((localTodo) => localTodo.id !== id))
-  }
+    const isSecure = findTodosHandler(localStorTodos, "id", id).isSecure;
+
+    if (isSecure) {
+      setIsWarning(true);
+      setTimeout(() => setIsWarning(false), 1000);
+      return;
+    }
+
+    setTodos(filterTodosHandlerById(todos, id));
+    setLocalStorTodos(filterTodosHandlerById(localStorTodos, id));
+  };
 
   const toggleTodoHandler = (id) => {
-    setTodos(
-      todos.map((todo) =>
+    const toggleTodos = (todosArray) => {
+      return todosArray.map((todo) =>
         todo.id === id
           ? { ...todo, isCompleted: !todo.isCompleted }
           : { ...todo }
-      )
-    )
+      );
+    };
 
-    setLocalStorTodos(
-      localStorTodos.map((localTodo) =>
-        localTodo.id === id
-          ? { ...localTodo, isCompleted: !localTodo.isCompleted }
-          : { ...localTodo }
-      )
-    )
-  }
+    setTodos(toggleTodos(todos));
+    setLocalStorTodos(toggleTodos(localStorTodos));
+  };
 
   const deleteCompletedTodosHandler = () => {
-    setTodos(todos.filter((todo) => !todo.isCompleted))
-    setLocalStorTodos(todos.filter((todo) => !todo.isCompleted))
-  }
+    const filterUnsecureCompletedTodos = (todosArray) => {
+      return todosArray.filter((todo) => !todo.isCompleted || todo.isSecure);
+    };
+
+    setTodos(filterUnsecureCompletedTodos(todos));
+    setLocalStorTodos(filterUnsecureCompletedTodos(todos));
+  };
 
   const resetTodosHandler = () => {
-    setTodos([])
-    setLocalStorTodos([])
-    setLocalStorTodosText([])
-    setCodeLocal(['', '', '', ''])
-  }
+    setTodos([]);
+    setLocalStorTodos([]);
+    setLocalStorTodosText([]);
+    setCodeLocal(["", "", "", ""]);
+  };
 
   const editSessionHandler = () => {
-    setIsEditSession((prev) => !prev)
-    setTodos(localStorTodos.filter((todo) => todo.id !== todo))
-  }
+    setIsEditSession((prev) => !prev);
+    setTodos(localStorTodos.filter((todo) => todo.id !== todo));
+  };
 
   const startSessionHandler = () => {
-    setIsEditSession((prev) => !prev)
-    resetTodosHandler()
-    setIsBlocked(false)
-  }
+    setIsEditSession((prev) => !prev);
+    resetTodosHandler();
+    setIsBlocked(false);
+  };
 
   useEffect(() => {
-    const isFullyCompletedTodos = todos.every((todos) => todos.isCompleted)
-    const isFullyCompletedLocalStorTodos = localStorTodos.every(
-      (todos) => todos.isCompleted
-    )
+    const isFullyCompletedTodos = (todosArray) => {
+      return todosArray.every((todo) => todo.isCompleted);
+    };
 
-    if (isFullyCompletedTodos && isFullyCompletedLocalStorTodos) {
-      setIsAllTodosCompleted(false)
+    if (isFullyCompletedTodos(todos) && isFullyCompletedTodos(localStorTodos)) {
+      setIsAllTodosCompleted(false);
     } else {
-      setIsAllTodosCompleted(true)
+      setIsAllTodosCompleted(true);
     }
-  }, [todos, localStorTodos])
+  }, [todos, localStorTodos]);
   return (
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ type: 'tween', duration: 0.3 }}
+        transition={{ type: "tween", duration: 0.3 }}
         className="App"
       >
+        {isWarning && (
+          <div className={styles.modalOverlay}>
+            <div className={styles.modalWindow}>
+              <NotifPopup text="Unlock first!" warning />
+            </div>
+          </div>
+        )}
+
         <TodoTitle />
 
         <TodoForm
@@ -212,7 +225,7 @@ function App() {
         />
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }
 
-export default App
+export default App;
