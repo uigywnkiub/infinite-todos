@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useCallback, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   RiTodoLine,
   RiTodoFill,
@@ -10,10 +10,10 @@ import {
   RiCheckboxBlankLine,
   RiCheckboxFill,
   RiFileCopyFill,
-} from 'react-icons/ri'
+} from "react-icons/ri";
 
 // styles
-import styles from './Todo.module.css'
+import styles from "./Todo.module.css";
 
 function Todo({
   todo,
@@ -24,18 +24,18 @@ function Todo({
   openCodeModalHandler,
   isTempLoggedIn,
 }) {
-  const [isCopyTodo, setIsCopyTodo] = useState(false)
+  const [isCopyTodo, setIsCopyTodo] = useState(false);
 
-  const copyTodoHandler = () => {
-    !isCopyTodo && navigator.clipboard.writeText(todo.text)
-    setIsCopyTodo(true)
-    setTimeout(() => setIsCopyTodo(false), 1000)
-  }
+  const copyTodoHandler = useCallback(() => {
+    !isCopyTodo && navigator.clipboard.writeText(todo.text);
+    setIsCopyTodo(true);
+    setTimeout(() => setIsCopyTodo(false), 1000);
+  }, [isCopyTodo, todo.text]);
 
-  const toggleSecureTodoHandler = () => {
-    !isTempLoggedIn && openCodeModalHandler()
-    secureTodo(todo.id, todo.text)
-  }
+  const toggleSecureTodoHandler = useCallback(() => {
+    !isTempLoggedIn && openCodeModalHandler();
+    secureTodo(todo.id, todo.text);
+  }, [isTempLoggedIn, openCodeModalHandler, secureTodo, todo.id, todo.text]);
 
   return (
     <div
@@ -67,7 +67,7 @@ function Todo({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ type: 'tween', duration: 0.3 }}
+          transition={{ type: "tween", duration: 0.3 }}
           exit={{ opacity: 0 }}
           className={styles.todoText}
         >
@@ -79,6 +79,7 @@ function Todo({
               dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
               dragMomentum={true}
               dragTransition={{ bounceStiffness: 200, bounceDamping: 20 }}
+              className={styles.grabCursor}
             >
               {todo.text}
             </motion.div>
@@ -87,7 +88,7 @@ function Todo({
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ type: 'spring', duration: 0.3 }}
+                transition={{ type: "spring", duration: 0.3 }}
                 exit={{ opacity: 1 }}
                 className={styles.copiedTodo}
               >
@@ -141,7 +142,7 @@ function Todo({
         />
       )}
     </div>
-  )
+  );
 }
 
-export default Todo
+export default Todo;
