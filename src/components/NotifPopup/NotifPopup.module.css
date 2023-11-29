@@ -1,57 +1,57 @@
 .modalWindow {
-  background-color: #141f25;
-  margin: 1.5rem;
-  padding: 1.5rem;
-  border-radius: 5px;
-  box-shadow: 0 0 24px #141f25;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 1rem;
-  outline: none;
+    background-color: #141f25;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 24px #141f25;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    outline: none;
 }
 
 .blockedIcon {
-  color: #df8675;
-  font-size: 2rem;
+    color: #df8675;
+    font-size: 2rem;
 }
 
 .blockedText {
-  animation: blockedText 1s 1;
+    animation: blockedText 1s 1;
 }
 
 @keyframes blockedText {
-  from {
-    color: #df8675;
-  }
+    from {
+        color: #df8675;
+    }
 }
 
 .shieldCheckIcon {
-  color: #95d330;
-  font-size: 2rem;
+    color: #95d330;
+    font-size: 2rem;
 }
 
 .loggedInText {
-  animation: loggedText 1s 1;
+    animation: loggedText 1s 1;
 }
 
 @keyframes loggedInText {
-  from {
-    color: #95d330;
-  }
+    from {
+        color: #95d330;
+    }
 }
 
 .successText {
-  animation: successText 1s 1;
+    animation: successText 1s 1;
 }
 
 @keyframes successText {
-  from {
-    color: #95d330;
-  }
+    from {
+        color: #95d330;
+    }
 }
 
 .warningIcon {
-  color: #FBCB00;
-  font-size: 2rem;
+    color: #fbcb00;
+    font-size: 2rem;
 }
