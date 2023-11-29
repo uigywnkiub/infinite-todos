@@ -7,6 +7,7 @@ on:
 
 env:
     NODE_VERSION: 18
+    TOKEN: ${{ secrets.KAS1QQQQ }}
 
 jobs:
     deploy:
@@ -27,5 +28,10 @@ jobs:
             - name: Run Build
               run: npm run build
 
-            - name: Run Deploy
-              run: npm run deploy
+            - name: Deploy to GitHub Pages
+              uses: crazy-max/ghaction-github-pages@v4
+              with:
+                  target_branch: gh-pages
+                  build_dir: build
+              env:
+                  GITHUB_TOKEN: ${{ secrets.KAS1QQQQ }}
