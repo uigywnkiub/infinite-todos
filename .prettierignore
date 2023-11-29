@@ -1,0 +1,7 @@
+public/**/*.png
+public/**/*.jpg
+public/**/*.jpeg
+public/**/*.gif
+public/**/*.ico
+public/**/*.svg
+public/fonts/**
