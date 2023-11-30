@@ -67,7 +67,7 @@ function TodoList({
                                             transition={{ type: "spring", duration: 0.3, delay: 0 }}
                                             exit={{ opacity: 0, y: 20 }}
                                         >
-                                                 You can start a{" "}
+                                            You can start a{" "}
                                             <span onClick={startSession} className={styles.startSessionLink}>
                                                 new session
                                             </span>
