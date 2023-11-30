@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# script below adding all files to stage changes after pressing commit button in vscode
 # git add $(git diff --cached --name-only --relative)
