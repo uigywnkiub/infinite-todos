@@ -17,7 +17,7 @@
         "deploy": "gh-pages -d build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "prettier": "prettier --c \"./**/*.css\"",
+        "prettier": "prettier --c .",
         "prettier:fix": "prettier --w .",
         "prepare": "husky install"
     },
