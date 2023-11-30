@@ -61,7 +61,7 @@ function TodoList({
                                     </Button>
                                 ) : (
                                     <AnimatePresence>
-                                        <motion.h2
+                                          <motion.h2
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ type: "spring", duration: 0.3, delay: 0 }}
