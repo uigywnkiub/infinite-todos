@@ -13,17 +13,13 @@ jobs:
     deploy:
         name: Deploying
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node: [14, 16, 18]
         permissions:
             contents: write
         steps:
             - name: Install Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: ${{ matrix.node }}
-                  cache: "npm"
+                  node-version: ${{ env.NODE_VERSION }}
 
             - name: Code Checkout
               uses: actions/checkout@v4
