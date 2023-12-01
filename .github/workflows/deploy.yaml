@@ -7,7 +7,7 @@ on:
             - main
 
 env:
-    NODE_VERSION: lts/*
+    NODE_VERSION: "lts/*"
 
 jobs:
     deploy:
@@ -20,6 +20,7 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: ${{ env.NODE_VERSION }}
+                  cache: "npm"
 
             - name: Code Checkout
               uses: actions/checkout@v4
