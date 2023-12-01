@@ -16,13 +16,11 @@ jobs:
         permissions:
             contents: write
         steps:
-            - name: Install Node.js
-              uses: actions/setup-node@v3
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v3
               with:
                   node-version: ${{ env.NODE_VERSION }}
-
-            - name: Code Checkout
-              uses: actions/checkout@v4
+                  cache: "npm"
 
             - name: Install Dependencies
               run: npm ci
@@ -30,7 +28,7 @@ jobs:
             - name: Run Build
               run: npm run build
 
-            - name: Deploy
+            - name: Deploying to GH-Pages
               uses: peaceiris/actions-gh-pages@v3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
