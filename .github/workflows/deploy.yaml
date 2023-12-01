@@ -16,7 +16,6 @@ jobs:
         permissions:
             contents: write
         steps:
-            - name: Cache node modules
             - uses: actions/checkout@v4
 
             - name: Cache node modules
