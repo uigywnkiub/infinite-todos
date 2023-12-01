@@ -7,19 +7,22 @@ on:
             - main
 
 env:
-    NODE_VERSION: 18
+    NODE_VERSION: lts/*
 
 jobs:
     deploy:
         name: Deploying
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node: [14, 16, 18]
         permissions:
             contents: write
         steps:
             - name: Install Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: ${{ env.NODE_VERSION }}
+                  node-version: ${{ matrix.node }}
                   cache: "npm"
 
             - name: Code Checkout
