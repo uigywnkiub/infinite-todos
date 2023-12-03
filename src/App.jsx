@@ -92,6 +92,10 @@ function App() {
             setTodos(updateTodosWithSecurityToggle(todos));
             setLocalStorTodos(updateTodosWithSecurityToggle(localStorTodos));
         }
+
+        if (isBlocked) {
+            setTimeout(() => closeCodeModalHandler(), 1000);
+        }
     };
 
     const deleteTodoHandler = (id) => {
