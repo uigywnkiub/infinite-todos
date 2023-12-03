@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/infinite-todos/static/css/main.729593f7.css",
-    "main.js": "/infinite-todos/static/js/main.300987b9.js",
+    "main.js": "/infinite-todos/static/js/main.c4762a5a.js",
     "index.html": "/infinite-todos/index.html",
     "main.729593f7.css.map": "/infinite-todos/static/css/main.729593f7.css.map",
-    "main.300987b9.js.map": "/infinite-todos/static/js/main.300987b9.js.map"
+    "main.c4762a5a.js.map": "/infinite-todos/static/js/main.c4762a5a.js.map"
   },
   "entrypoints": [
     "static/css/main.729593f7.css",
-    "static/js/main.300987b9.js"
+    "static/js/main.c4762a5a.js"
   ]
 }
