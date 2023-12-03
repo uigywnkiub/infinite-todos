@@ -1,6 +1,10 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
+
+// redux actions
+import { addTodo, toggleTodo, deleteTodo, deleteCompletedTodos, clearAllTodos } from "./redux/slices/todoSlice";
 
 // components
 import TodoTitle from "./components/Todos/TodoTitle";
@@ -18,6 +22,8 @@ import NotifPopup from "./components/NotifPopup/NotifPopup";
 import styles from "./components/Modal/CodeModal.module.css";
 
 function App() {
+    const dispatch = useDispatch();
+
     const [todos, setTodos] = useState([]);
     const [localStorTodos, setLocalStorTodos] = useLocalStorage("todos", []);
     const [localStorTodosText, setLocalStorTodosText] = useLocalStorage("todosSecureHelper", []);
@@ -53,6 +59,7 @@ function App() {
         };
         const { id: idMatch } = newTodo;
 
+        dispatch(addTodo(newTodo));
         setTodos([...todos, newTodo]);
         setLocalStorTodos([...todos, newTodo]);
         setLocalStorTodosText([...localStorTodosText, { text, idMatch }]);
@@ -62,13 +69,13 @@ function App() {
     const filterTodosHandlerById = (todosArray, id) => {
         return todosArray.filter((todo) => todo.id !== id);
     };
-    const findTodosHandler = (todosArray, wantedField, id) => {
+    const findTodosHandlerByFieldAndId = (todosArray, wantedField, id) => {
         return todosArray.find((todo) => todo[wantedField] === id);
     };
 
     const secureTodoHandler = (id, text) => {
         const replaceTextWithStars = (todo) => (todo = "•".repeat(todo.length));
-        const matchedTodo = findTodosHandler(localStorTodosText, "idMatch", id);
+        const matchedTodo = findTodosHandlerByFieldAndId(localStorTodosText, "idMatch", id);
         const updateTodosWithSecurityToggle = (todosArray) => {
             return todosArray.map((todo) =>
                 todo.id === id
@@ -88,7 +95,7 @@ function App() {
     };
 
     const deleteTodoHandler = (id) => {
-        const isSecure = findTodosHandler(localStorTodos, "id", id).isSecure;
+        const isSecure = findTodosHandlerByFieldAndId(localStorTodos, "id", id).isSecure;
 
         if (isSecure) {
             setIsWarning(true);
@@ -96,6 +103,7 @@ function App() {
             return;
         }
 
+        dispatch(deleteTodo(id));
         setTodos(filterTodosHandlerById(todos, id));
         setLocalStorTodos(filterTodosHandlerById(localStorTodos, id));
     };
@@ -107,6 +115,7 @@ function App() {
             );
         };
 
+        dispatch(toggleTodo(id));
         setTodos(toggleTodos(todos));
         setLocalStorTodos(toggleTodos(localStorTodos));
     };
@@ -116,11 +125,13 @@ function App() {
             return todosArray.filter((todo) => !todo.isCompleted || todo.isSecure);
         };
 
+        dispatch(deleteCompletedTodos());
         setTodos(filterUnsecureCompletedTodos(todos));
         setLocalStorTodos(filterUnsecureCompletedTodos(todos));
     };
 
     const resetTodosHandler = () => {
+        dispatch(clearAllTodos());
         setTodos([]);
         setLocalStorTodos([]);
         setLocalStorTodosText([]);

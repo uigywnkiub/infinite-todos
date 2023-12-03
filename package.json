@@ -4,10 +4,12 @@
     "homepage": "https://kas1qqqq.github.io/infinite-todos/",
     "private": "false",
     "dependencies": {
+        "@reduxjs/toolkit": "^1.9.7",
         "framer-motion": "^7.6.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^4.6.0",
+        "react-redux": "^8.1.3",
         "react-scripts": "^5.0.1",
         "uuid": "^9.0.0"
     },
@@ -41,7 +43,7 @@
     },
     "devDependencies": {
         "gh-pages": "^5.0.0",
-        "prettier": "^3.1.0",
-        "husky": "^8.0.0"
+        "husky": "^8.0.0",
+        "prettier": "^3.1.0"
     }
 }
