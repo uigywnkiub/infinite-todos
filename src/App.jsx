@@ -59,7 +59,6 @@ function App() {
         };
         const { id: idMatch } = newTodo;
 
-        navigator.vibrate([100, 500]);
         dispatch(addTodo(newTodo));
         setTodos([...todos, newTodo]);
         setLocalStorTodos([...todos, newTodo]);
