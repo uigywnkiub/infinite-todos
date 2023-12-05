@@ -19,3 +19,14 @@
     color: #90caf9;
     border-bottom: 3px solid #4051b6;
 }
+
+
+@media screen and (max-width: 480px) {
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+}

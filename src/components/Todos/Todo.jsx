@@ -15,13 +15,24 @@ import {
 // styles
 import styles from "./Todo.module.css";
 
+// hook
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+
 function Todo({ todo, deleteTodo, toggleTodo, secureTodo, isEditSession, openCodeModalHandler, isTempLoggedIn }) {
     const [isCopyTodo, setIsCopyTodo] = useState(false);
+    const isMobile = useMediaQuery("(min-width: 480px)");
+    console.log("🚀  isMobile:", isMobile);
 
-    const copyTodoHandler = useCallback(() => {
-        !isCopyTodo && navigator.clipboard.writeText(todo.text);
-        setIsCopyTodo(true);
-        setTimeout(() => setIsCopyTodo(false), 1000);
+    const copyTodoHandler = useCallback(async () => {
+        try {
+            if (!isCopyTodo && navigator?.clipboard?.writeText) {
+                await navigator.clipboard.writeText(todo.text);
+                setIsCopyTodo(true);
+                setTimeout(() => setIsCopyTodo(false), 1000);
+            }
+        } catch (err) {
+            console.error(err);
+        }
     }, [isCopyTodo, todo.text]);
 
     const toggleSecureTodoHandler = useCallback(() => {
@@ -35,19 +46,23 @@ function Todo({ todo, deleteTodo, toggleTodo, secureTodo, isEditSession, openCod
                 todo.isSecure && styles.removeLineThrough
             }`}
         >
-            {!isCopyTodo ? (
-                todo.isCompleted ? (
-                    <RiTodoFill title="Click to copy" className={styles.todoIcon} />
-                ) : (
-                    <RiTodoLine title="Click to copy" onClick={copyTodoHandler} className={styles.todoIcon} />
-                )
-            ) : (
+            {isMobile && (
                 <>
-                    <RiFileCopyFill
-                        title="Copied to clipboard"
-                        onClick={copyTodoHandler}
-                        className={styles.copiedIcon}
-                    />
+                    {!isCopyTodo ? (
+                        todo.isCompleted ? (
+                            <RiTodoFill title="Click to copy" className={styles.todoIcon} />
+                        ) : (
+                            <RiTodoLine title="Click to copy" onClick={copyTodoHandler} className={styles.todoIcon} />
+                        )
+                    ) : (
+                        <>
+                            <RiFileCopyFill
+                                title="Copied to clipboard"
+                                onClick={copyTodoHandler}
+                                className={styles.copiedIcon}
+                            />
+                        </>
+                    )}
                 </>
             )}
 
@@ -66,7 +81,7 @@ function Todo({ todo, deleteTodo, toggleTodo, secureTodo, isEditSession, openCod
                             dragPropagation
                             dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
                             dragMomentum={true}
-                            dragTransition={{ bounceStiffness: 200, bounceDamping: 20 }}
+                            dragTransition={{ bounceStiffness: 200, bounceDamping: 15 }}
                             className={styles.grabCursor}
                         >
                             {todo.text}

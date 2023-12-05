@@ -12,6 +12,7 @@
     user-select: none;
     animation-name: todo;
     transition: all 0.3s;
+
     animation-duration: 0.3s;
 }
 
@@ -133,8 +134,7 @@
 }
 
 .grabCursor:active {
-    opacity: 0.7;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0.5;
 }
 
 @media screen and (max-width: 480px) {
@@ -145,5 +145,31 @@
     .copiedTodo,
     .todoText {
         font-size: 1.25rem;
+    }
+
+    .copiedIcon,
+    .todoIcon,
+    .lockIcon,
+    .deleteIcon,
+    .checkIcon {
+        font-size: 1.8rem;
+    }
+
+    .copiedIcon:hover,
+    .todoIcon:hover,
+    .lockIcon:hover,
+    .deleteIcon:hover,
+    .checkIcon:hover {
+        transform: none;
+        background-color: transparent;
+    }
+
+    .copiedIcon:active,
+    .todoIcon:active,
+    .lockIcon:active,
+    .deleteIcon:active,
+    .checkIcon:active {
+        transform: none;
+        background-color: transparent;
     }
 }

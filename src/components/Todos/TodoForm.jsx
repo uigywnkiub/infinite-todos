@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { BiErrorCircle } from "react-icons/bi";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 // components
 import Button from "../UI/Button";
@@ -13,14 +13,17 @@ function TodoForm({ localStorTodos, todos, addTodo, isEditSession }) {
 
     const onChangeHandler = (e) => setText(e.target.value);
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
+    const onSubmitHandler = useCallback(
+        (e) => {
+            e.preventDefault();
 
-        if (text.length >= 25) return;
-        if (text && text.replace(/\s+/g, "")) addTodo(text);
+            if (text.length >= 25) return;
+            if (text && text.replace(/\s+/g, "")) addTodo(text);
 
-        setText("");
-    };
+            setText("");
+        },
+        [addTodo, text]
+    );
 
     return (
         <div className={styles.todoFormContainer}>
@@ -33,7 +36,7 @@ function TodoForm({ localStorTodos, todos, addTodo, isEditSession }) {
                             whileTap={{ scale: 0.9 }}
                             whileFocus={{
                                 scale: 1.05,
-                                caretColor: "#95d330",
+                                caretColor: "#90CAF9",
                             }}
                             initial={{ opacity: 0.5, x: -50, width: "30%" }}
                             animate={{ opacity: 1, x: 0, width: "40%" }}
@@ -88,14 +91,14 @@ function TodoForm({ localStorTodos, todos, addTodo, isEditSession }) {
                 </motion.div>
             )}
 
-            {text.length !== 25 && !!text.length && (
+            {/* {text.length !== 25 && !!text.length && (
                 <motion.div
                     initial={{ opacity: 0, y: 0 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ type: "tween", duration: 0.3 }}
                     className={styles.characterLimiter}
                 >
-                    {/* <span>Character limiter</span> */}
+                    <span>Character limiter</span>
                     <span></span>
                     <div>
                         <span>{text.length}</span>
@@ -103,7 +106,7 @@ function TodoForm({ localStorTodos, todos, addTodo, isEditSession }) {
                         <span className={styles.characterLimiterCount}>25</span>
                     </div>
                 </motion.div>
-            )}
+            )} */}
         </div>
     );
 }
