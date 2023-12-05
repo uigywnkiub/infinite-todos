@@ -20,11 +20,10 @@ function NotifPopup({ text, warning = false, blocked = false, success = false })
                 }}
             >
                 <motion.div
-                    initial={{ opacity: 0, scale: 1.3, y: -80 }}
+                    initial={{ opacity: 0, scale: 1.3, y: -40 }}
                     animate={{
                         opacity: 1,
                         scale: 1,
-                        duration: 0.3,
                         y: 0,
                     }}
                     exit={{ opacity: 0 }}
